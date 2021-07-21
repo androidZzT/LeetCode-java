@@ -4,11 +4,12 @@ public class ViewGroup extends View {
 
     View[] mChildren;
 
-    public ViewGroup() {
-
+    public ViewGroup(String name) {
+        super(name);
     }
 
-    public ViewGroup(View[] children) {
-        mChildren = children;
+    @Override
+    public String toString() {
+        return "ViewGroup=" + name;
     }
 }
