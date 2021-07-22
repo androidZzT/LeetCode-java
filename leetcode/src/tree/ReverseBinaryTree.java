@@ -15,7 +15,7 @@ public class ReverseBinaryTree {
         tree.insert(6);
         tree.insert(9);
 //        InOrderPrint.stackInOrderPrint(tree.getRoot());
-        reverseTree(tree.getRoot());
+        _reverseTree(tree.getRoot());
         InOrderPrint.stackInOrderPrint(tree.getRoot());
     }
 
@@ -32,5 +32,15 @@ public class ReverseBinaryTree {
             if (cur.right != null) queue.add(cur.right);
         }
         return root;
+    }
+
+    public static void _reverseTree(TreeNode root) {
+        if (root == null) return;
+
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        _reverseTree(root.left);
+        _reverseTree(root.right);
     }
 }
