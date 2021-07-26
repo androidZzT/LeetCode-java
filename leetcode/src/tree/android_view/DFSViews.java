@@ -2,7 +2,7 @@ package tree.android_view;
 
 import java.util.*;
 
-public class DFSViews {
+public class                                                                                                                                                                                                                                                                                          DFSViews {
 
     public static void main(String[] args) {
         View[] level1 = new View[] {new ViewGroup("1"), new View("2")};
