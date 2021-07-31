@@ -14,7 +14,7 @@ public class Heap {
         Heap heap = new Heap();
         heap.array = arr;
         heap.heapSize = arr.length;
-        for (int i = (arr.length - 1) / 2; i >= 0; i--) {
+        for (int i = parent(arr.length - 1); i >= 0; i--) {
             heap._maxHeapify(i);
         }
         return heap;
@@ -29,34 +29,59 @@ public class Heap {
         return Arrays.toString(array);
     }
 
-    private void _maxHeapify(int i) {
-        System.out.println("_maxHeapify i="+ i);
-        int l = left(i);
-        int r = right(i);
-        System.out.println("l="+ l + ", r="+r);
+    public static void maxHeapify(int[]arr, int i) {
+        System.out.println("_maxHeapify i="+ i + ", size=" + arr.length);
+        int l = i * 2 + 1;
+        int r = i * 2 + 2;
         int largest = i;
-        if (l < size() && array[l] > array[i]) {
+        if (l < arr.length && arr[l] > arr[largest]) {
             largest = l;
         }
-        if (r < size() && array[r] > array[i]) {
+        if (r < arr.length && arr[r] > arr[largest]) {
             largest = r;
         }
-        System.out.println("largest="+ largest);
+        System.out.println("_maxHeapify l="+ l + ", r="+r +", largest="+ largest + ", val=" + arr[largest]);
+        if (largest != i) {
+            Utils.swap(arr, i, largest);
+            maxHeapify(arr, largest);
+        }
+    }
+
+    public void _maxHeapify(int i) {
+        System.out.println("_maxHeapify i="+ i + ", size=" + size());
+        int l = left(i);
+        int r = right(i);
+        int largest = i;
+        if (l < size() && array[l] > array[largest]) {
+            largest = l;
+        }
+        if (r < size() && array[r] > array[largest]) {
+            largest = r;
+        }
         if (largest != i) {
             Utils.swap(array, i, largest);
             _maxHeapify(largest);
         }
     }
 
-    private int left(int i) {
+    public void heapSort() {
+        int size = array.length;
+        for (int i = size - 1; i > 0; i--) {
+            Utils.swap(array, i, 0);
+            heapSize --;
+            _maxHeapify(0);
+        }
+    }
+
+    private static int left(int i) {
         return (i << 1) + 1;
     }
 
-    private int right(int i) {
+    private static int right(int i) {
         return (i << 1) + 2;
     }
 
-    private int parent(int i) {
+    private static int parent(int i) {
         return i >> 1;
     }
 
